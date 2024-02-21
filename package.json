@@ -1,0 +1,48 @@
+{
+	"name": "@btakita/herbalaciousbliss-site",
+	"type": "module",
+	"version": "0.0.1",
+	"scripts": {
+		"build": "bun build.ts",
+		"clear": "rm -rf ./dist",
+		"dev": "bun run dev:sourcemap__resolve__bun",
+		"dev:raw": "bun index.ts",
+		"dev:sourcemap__resolve__bun": "bin/sourcemap__resolve__bun.ts -f index.ts",
+		"db:drop": "drizzle-kit drop",
+		"db:generate": "drizzle-kit generate:sqlite",
+		"db:migrate": "bun ./db/migrate.ts",
+		"db:push": "drizzle-config push:sqlite",
+		"start": "bin/sourcemap__resolve__bun.ts -f start.ts",
+		"clean": "rm -rf ./dist"
+	},
+	"dependencies": {
+		"@ctx-core/preprocess": "^0.1.2",
+		"@ctx-core/source-map": "^0.2.50",
+		"@btakita/ui--server--herbalaciousbliss": "workspace:*",
+		"@rappstack/domain--any--blog": "workspace:*",
+		"@rappstack/domain--server": "workspace:*",
+		"@rappstack/domain--server--blog": "workspace:*",
+		"@rappstack/ui--any": "workspace:*",
+		"@rappstack/ui--any--blog": "workspace:*",
+		"@rappstack/ui--browser--blog": "workspace:*",
+		"@rappstack/ui--server": "workspace:*",
+		"@rappstack/ui--server--blog": "workspace:*",
+		"@rebuildjs/tailwindcss": "^0.8.43",
+		"@tailwindcss/forms": "^0.5.7",
+		"@tailwindcss/typography": "^0.5.10",
+		"cssnano": "^6.0.3",
+		"ctx-core": "^6.4.3",
+		"elysia": "^0.8.17",
+		"esbuild": "^0.20.1",
+		"esmcss": "^0.2.2",
+		"marked": "^12.0.0",
+		"picocolors": "^1.0.0",
+		"rebuildjs": "^0.63.2",
+		"relementjs": "^0.73.3",
+		"relysjs": "^1.14.6",
+		"tailwindcss": "^3.4.1"
+	},
+	"devDependencies": {
+		"bun-types": "latest"
+	}
+}
