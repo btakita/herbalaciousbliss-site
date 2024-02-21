@@ -1,5 +1,5 @@
 {
-	"name": "@btakita/herbalaciousbliss-site",
+	"name": "@btakita/herbaliciousbliss-site",
 	"type": "module",
 	"version": "0.0.1",
 	"scripts": {
@@ -18,7 +18,8 @@
 	"dependencies": {
 		"@ctx-core/preprocess": "^0.1.2",
 		"@ctx-core/source-map": "^0.2.50",
-		"@btakita/ui--server--herbalaciousbliss": "workspace:*",
+		"@btakita/domain--server--herbaliciousbliss": "workspace:*",
+		"@btakita/ui--server--herbaliciousbliss": "workspace:*",
 		"@rappstack/domain--any--blog": "workspace:*",
 		"@rappstack/domain--server": "workspace:*",
 		"@rappstack/domain--server--blog": "workspace:*",
@@ -32,6 +33,8 @@
 		"@tailwindcss/typography": "^0.5.10",
 		"cssnano": "^6.0.3",
 		"ctx-core": "^6.4.3",
+		"drizzle-kit": "^0.20.14",
+		"drizzle-orm": "^0.29.3",
 		"elysia": "^0.8.17",
 		"esbuild": "^0.20.1",
 		"esmcss": "^0.2.2",

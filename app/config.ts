@@ -2,14 +2,14 @@
 import { type logo_image_T } from '@rappstack/domain--server/logo'
 import { type site_T } from '@rappstack/domain--server/site'
 import { type social_T } from '@rappstack/domain--server/social'
-import herbalaciousbliss_logo_webp from '../public/asset/image/herbalaciousbliss-logo.webp'
+import herbaliciousbliss_logo_webp from '../public/asset/image/herbaliciousbliss-logo.webp'
 // You can import this data from anywhere in your site by using the `import` keyword.
 export const site:site_T = {
-	website: 'https://herbalaciousbliss.com', // replace this with your deployed domain
+	website: 'https://herbaliciousbliss.com', // replace this with your deployed domain
 	author: 'Lyra Star',
 	description: 'Find Your Herbal Bliss',
 	title: 'Herbalacious Bliss',
-	og_image: herbalaciousbliss_logo_webp,
+	og_image: herbaliciousbliss_logo_webp,
 	light_and_dark_mode: true,
 }
 export const logo_image:logo_image_T = {

@@ -1,5 +1,5 @@
 import './index.css'
-import { home__doc_html_ } from '@btakita/ui--server--herbalaciousbliss/home'
+import { home__doc_html_ } from '@btakita/ui--server--herbaliciousbliss/home'
 import { site_request_ctx__ensure } from '@rappstack/domain--server/ctx'
 import { Elysia } from 'elysia'
 import { middleware_ } from 'rebuildjs/server'
