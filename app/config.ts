@@ -8,7 +8,7 @@ export const site:site_T = {
 	website: 'https://herbaliciousbliss.com', // replace this with your deployed domain
 	author: 'Lyra Star',
 	description: 'Find Your Herbal Bliss',
-	title: 'Herbalacious Bliss',
+	title: 'Herbalicious Bliss',
 	og_image: herbaliciousbliss_logo_webp,
 	light_and_dark_mode: true,
 }
