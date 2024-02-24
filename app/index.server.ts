@@ -1,6 +1,6 @@
 import './index.css'
 import { home__doc_html_ } from '@btakita/ui--server--herbaliciousbliss/home'
-import { session_ } from '@rappstack/domain--server--auth/auth'
+import { csrf_403_response_, session_headers_ } from '@rappstack/domain--server--auth/auth'
 import { site_request_ctx__ensure } from '@rappstack/domain--server/ctx'
 import { I } from 'ctx-core/combinators'
 import { Elysia } from 'elysia'
@@ -17,7 +17,13 @@ export default middleware_(middleware_ctx=>
 				site,
 				social_a1
 			})
-			await rmemo__wait(()=>session_(ctx), I)
+			if (csrf_403_response_(ctx)) {
+				return csrf_403_response_(ctx)
+			}
+			const headers = await rmemo__wait(
+				()=>session_headers_(ctx),
+				I)
+				.then(headers=>headers!)
 			return html_response__new(
 				home__doc_html_({
 					ctx: site_request_ctx__ensure(
@@ -27,5 +33,5 @@ export default middleware_(middleware_ctx=>
 							site,
 							social_a1,
 						})
-				}))
+				}), { headers })
 		}))

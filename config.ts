@@ -1,10 +1,4 @@
 // Place any global data in this file.
-import { type AuthConfig } from '@auth/core'
-import GitHub from '@auth/core/providers/github'
-import { DrizzleAdapter } from '@auth/drizzle-adapter'
-import { herbaliciousbliss_server_env_ } from '@btakita/domain--server--herbaliciousbliss/env'
-import { auth_config__set } from '@rappstack/domain--server--auth'
-import { drizzle_db_ } from '@rappstack/domain--server/drizzle'
 import { type logo_image_T } from '@rappstack/domain--server/logo'
 import { type site_T } from '@rappstack/domain--server/site'
 import { type social_T } from '@rappstack/domain--server/social'
@@ -38,15 +32,4 @@ export function config__init() {
 	src_path__set(app_ctx, process.cwd())
 	relement__use(server__relement)
 	sqlite_db__name__set(app_ctx, './db/app.db')
-	auth_config__set(app_ctx, <AuthConfig>{
-		adapter: DrizzleAdapter(drizzle_db_(app_ctx)),
-		trustHost: true,
-		secret: herbaliciousbliss_server_env_().AUTH_SECRET,
-		providers: [
-			GitHub({
-				clientId: herbaliciousbliss_server_env_().AUTH_GITHUB_ID,
-				clientSecret: herbaliciousbliss_server_env_().AUTH_GITHUB_SECRET,
-			}),
-		],
-	})
 }
