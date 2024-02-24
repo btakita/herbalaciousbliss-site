@@ -6,7 +6,7 @@ import { I } from 'ctx-core/combinators'
 import { Elysia } from 'elysia'
 import { middleware_, rmemo__wait } from 'rebuildjs/server'
 import { html_response__new } from 'relysjs/server'
-import { logo_image, site, social_a1 } from './config.js'
+import { logo_image, site, social_a1 } from '../config.js'
 export default middleware_(middleware_ctx=>
 	new Elysia({
 		name: 'root_routes'

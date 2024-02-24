@@ -13,7 +13,7 @@ import {
 	relysjs_browser__build,
 	relysjs_server__build
 } from 'relysjs/server'
-import { config__init } from './app/index.js'
+import { config__init } from './config.js'
 import tailwindcss_config from './tailwind.config.js'
 export async function build(config?:relysjs__build_config_T) {
 	config__init()
@@ -51,10 +51,13 @@ function server_external_() {
 		'..',
 		'..',
 		'node_modules'
-	)).then(file_a1=>
-		file_a1
+	)).then(file_a1=>[
+		...file_a1
 			.filter(file=>file !== '@btakita' && file !== '@rappstack')
-			.map(file=>file[0] === '@' ? file + '/*' : file))
+			.map(file=>file[0] === '@' ? file + '/*' : file),
+		'bun',
+		'bun:*'
+	])
 }
 if (is_entry_file_(import.meta.url, process.argv[1])) {
 	build({
