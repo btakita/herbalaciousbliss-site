@@ -17,6 +17,7 @@ import { config__init } from './config.js'
 import tailwindcss_config from './tailwind.config.js'
 export async function build(config?:relysjs__build_config_T) {
 	config__init()
+	const esmcss_esbuild_plugin = esmcss_esbuild_plugin_()
 	const rebuild_tailwind_plugin = rebuild_tailwind_plugin_({
 		tailwindcss_config,
 		postcss_plugin_a1_: tailwindcss_plugin=>[
@@ -29,7 +30,11 @@ export async function build(config?:relysjs__build_config_T) {
 		relysjs_browser__build({
 			...config ?? {},
 			treeShaking: true,
-			plugins: [rebuild_tailwind_plugin, preprocess_plugin],
+			plugins: [
+				esmcss_esbuild_plugin,
+				rebuild_tailwind_plugin,
+				preprocess_plugin,
+			],
 		}),
 		relysjs_server__build({
 			...config ?? {},
@@ -37,7 +42,7 @@ export async function build(config?:relysjs__build_config_T) {
 			external: await server_external_(),
 			treeShaking: true,
 			plugins: [
-				esmcss_esbuild_plugin_(),
+				esmcss_esbuild_plugin,
 				rebuild_tailwind_plugin,
 				preprocess_plugin,
 			],
@@ -71,7 +76,7 @@ if (is_entry_file_(import.meta.url, process.argv[1])) {
 }
 function preprocess_plugin_():Plugin {
 	return {
-		name: 'hyop',
+		name: 'preprocess',
 		setup(build) {
 			if (import_meta_env_().NODE_ENV !== 'production') {
 				build.onLoad({ filter: /(\/ctx-core\/?.*|\/hyop\/?.*)$/ }, async ({ path })=>{
