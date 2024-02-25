@@ -19,6 +19,7 @@
 		"@ctx-core/preprocess": "^0.1.2",
 		"@ctx-core/source-map": "^0.2.54",
 		"@btakita/domain--server--herbaliciousbliss": "workspace:*",
+		"@btakita/ui--any--herbaliciousbliss": "workspace:*",
 		"@btakita/ui--server--herbaliciousbliss": "workspace:*",
 		"@persontric/adapter-drizzle": "workspace:*",
 		"@persontric/adapter-sqlite": "workspace:*",

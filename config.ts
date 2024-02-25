@@ -1,4 +1,11 @@
 // Place any global data in this file.
+import {
+	bootstrap_substack_,
+	fa_facebook_,
+	fa_instagram_,
+	fa_linkedin_,
+	fa_x_twitter_
+} from '@btakita/ui--any--herbaliciousbliss/icon'
 import { type logo_image_T } from '@rappstack/domain--server/logo'
 import { type site_T } from '@rappstack/domain--server/site'
 import { type social_T } from '@rappstack/domain--server/social'
@@ -24,6 +31,36 @@ export const logo_image:logo_image_T = {
 	height: 46,
 }
 export const social_a1:social_T[] = [
+	{
+		icon_: bootstrap_substack_,
+		link_title: 'Substack',
+		href: 'https://lyrastarmist.substack.com/',
+		active: true,
+	},
+	{
+		icon_: fa_facebook_,
+		link_title: 'Facebook',
+		href: 'https://www.facebook.com/HerbaliciousBliss',
+		active: true,
+	},
+	{
+		icon_: fa_instagram_,
+		link_title: 'Instagram',
+		href: 'https://www.instagram.com/lyra_prism/',
+		active: true,
+	},
+	{
+		icon_: fa_linkedin_,
+		link_title: 'LinkedIn',
+		href: 'https://www.linkedin.com/in/lyra-starmist/',
+		active: true,
+	},
+	{
+		icon_: fa_x_twitter_,
+		link_title: 'X/Twitter',
+		href: 'https://twitter.com/SoulSparkLove',
+		active: true,
+	},
 ]
 export function config__init() {
 	const port = parseInt(import_meta_env_().HERBALACIOUSBLISS_PORT) || 4102
