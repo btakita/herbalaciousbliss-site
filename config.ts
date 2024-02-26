@@ -94,11 +94,11 @@ export function config__init() {
 }
 declare module 'persontric' {
 	interface Register {
-		Persontric:typeof persontric,
+		Persontric:typeof persontric
 		DatabasePersonAttributes:{
 			id:string
 			google_openid:string
-		},
+		}
 		DatabaseSessionAttributes:{
 			id:string
 			google_openid:string
