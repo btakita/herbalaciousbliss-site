@@ -1,0 +1,1 @@
+ALTER TABLE person ADD `google_openid` text;

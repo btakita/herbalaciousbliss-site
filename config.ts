@@ -1,4 +1,5 @@
 // Place any global data in this file.
+import { person_tbl, session_tbl } from '@btakita/domain--server--herbaliciousbliss/schema'
 import {
 	bootstrap_substack_,
 	fa_facebook_,
@@ -6,11 +7,15 @@ import {
 	fa_linkedin_,
 	fa_x_twitter_
 } from '@btakita/ui--any--herbaliciousbliss/icon'
+import { DrizzleSQLiteAdapter } from '@persontric/adapter-drizzle'
+import { auth_adapter__set, persontric__set } from '@rappstack/domain--server--auth/auth'
+import { drizzle_db_ } from '@rappstack/domain--server/drizzle'
 import { type logo_image_T } from '@rappstack/domain--server/logo'
 import { type site_T } from '@rappstack/domain--server/site'
 import { type social_T } from '@rappstack/domain--server/social'
 import { sqlite_db__name__set } from '@rappstack/domain--server/sqlite'
 import { import_meta_env_ } from 'ctx-core/env'
+import { Persontric, RegisterDatabasePersonAttributes } from 'persontric'
 import { relement__use } from 'relementjs'
 import { server__relement } from 'relementjs/server'
 import { app_ctx, cwd__set, port__set, src_path__set } from 'relysjs/server'
@@ -62,6 +67,21 @@ export const social_a1:social_T[] = [
 		active: true,
 	},
 ]
+const auth_adapter = new DrizzleSQLiteAdapter(drizzle_db_(app_ctx), session_tbl, person_tbl)
+const persontric = new Persontric(
+	auth_adapter, {
+		session_cookie: {
+			attributes: {
+				secure: import_meta_env_().NODE_ENV === 'production'
+			}
+		},
+		session_attributes_: (attributes:RegisterDatabasePersonAttributes)=>{
+			return {
+				id: attributes.id,
+				google_openid: attributes.google_openid,
+			}
+		}
+	})
 export function config__init() {
 	const port = parseInt(import_meta_env_().HERBALACIOUSBLISS_PORT) || 4102
 	port__set(app_ctx, port)
@@ -69,4 +89,19 @@ export function config__init() {
 	src_path__set(app_ctx, process.cwd())
 	relement__use(server__relement)
 	sqlite_db__name__set(app_ctx, './db/app.db')
+	auth_adapter__set(app_ctx, auth_adapter)
+	persontric__set(app_ctx, persontric) // init
+}
+declare module 'persontric' {
+	interface Register {
+		Persontric:typeof persontric,
+		DatabasePersonAttributes:{
+			id:string
+			google_openid:string
+		},
+		DatabaseSessionAttributes:{
+			id:string
+			google_openid:string
+		}
+	}
 }
