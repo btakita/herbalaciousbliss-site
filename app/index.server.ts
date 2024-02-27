@@ -1,7 +1,6 @@
 import './index.css'
 import { herbaliciousbliss_server_env_ } from '@btakita/domain--server--herbaliciousbliss/env'
 import { home__doc_html_ } from '@btakita/ui--server--herbaliciousbliss/home'
-import { cookie__set } from '@ctx-core/cookie'
 import { csrf_403_response_, session_headers_ } from '@rappstack/domain--server--auth/auth'
 import { site_request_ctx__ensure } from '@rappstack/domain--server/ctx'
 import { redirect_response__new } from '@rappstack/domain--server/response'
