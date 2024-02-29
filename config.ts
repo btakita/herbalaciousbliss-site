@@ -1,4 +1,6 @@
 // Place any global data in this file.
+import { person_tbl__set, session_tbl__set } from '@btakita/domain--server--herbaliciousbliss/auth'
+import { herbaliciousbliss_server_env_ } from '@btakita/domain--server--herbaliciousbliss/env'
 import { person_tbl, session_tbl } from '@btakita/domain--server--herbaliciousbliss/schema'
 import {
 	bootstrap_substack_,
@@ -7,15 +9,13 @@ import {
 	fa_linkedin_,
 	fa_x_twitter_
 } from '@btakita/ui--any--herbaliciousbliss/icon'
-import { DrizzleSQLiteAdapter } from '@persontric/adapter-drizzle'
-import { auth_adapter__set, persontric__set } from '@rappstack/domain--server--auth/auth'
-import { drizzle_db_ } from '@rappstack/domain--server/drizzle'
+import { auth_google_id__set, auth_google_secret__set } from '@rappstack/domain--server--auth/google'
 import { type logo_image_T } from '@rappstack/domain--server/logo'
 import { type site_T } from '@rappstack/domain--server/site'
 import { type social_T } from '@rappstack/domain--server/social'
-import { sqlite_db__name__set } from '@rappstack/domain--server/sqlite'
+import { sqlite_db__set } from '@rappstack/domain--server/sqlite'
+import Database from 'bun:sqlite'
 import { import_meta_env_ } from 'ctx-core/env'
-import { Persontric, RegisterDatabasePersonAttributes } from 'persontric'
 import { relement__use } from 'relementjs'
 import { server__relement } from 'relementjs/server'
 import { app_ctx, cwd__set, port__set, src_path__set } from 'relysjs/server'
@@ -67,41 +67,18 @@ export const social_a1:social_T[] = [
 		active: true,
 	},
 ]
-const auth_adapter = new DrizzleSQLiteAdapter(drizzle_db_(app_ctx), session_tbl, person_tbl)
-const persontric = new Persontric(
-	auth_adapter, {
-		session_cookie: {
-			attributes: {
-				secure: import_meta_env_().NODE_ENV === 'production'
-			}
-		},
-		session_attributes_: (attributes:RegisterDatabasePersonAttributes)=>{
-			return {
-				id: attributes.id,
-				google_openid: attributes.google_openid,
-			}
-		}
-	})
 export function config__init() {
 	const port = parseInt(import_meta_env_().HERBALACIOUSBLISS_PORT) || 4102
 	port__set(app_ctx, port)
 	cwd__set(app_ctx, process.cwd())
 	src_path__set(app_ctx, process.cwd())
 	relement__use(server__relement)
-	sqlite_db__name__set(app_ctx, './db/app.db')
-	auth_adapter__set(app_ctx, auth_adapter)
-	persontric__set(app_ctx, persontric) // init
-}
-declare module 'persontric' {
-	interface Register {
-		Persontric:typeof persontric
-		DatabasePersonAttributes:{
-			id:string
-			google_openid:string
-		}
-		DatabaseSessionAttributes:{
-			id:string
-			google_openid:string
-		}
-	}
+	const sqlite_db = new Database('./db/app.db')
+	sqlite_db.exec('PRAGMA journal_mode = WAL;')
+	sqlite_db__set(app_ctx, sqlite_db)
+	person_tbl__set(app_ctx, person_tbl)
+	session_tbl__set(app_ctx, session_tbl)
+	const env = herbaliciousbliss_server_env_()
+	auth_google_id__set(app_ctx, env.AUTH_GOOGLE_ID)
+	auth_google_secret__set(app_ctx, env.AUTH_GOOGLE_SECRET)
 }
