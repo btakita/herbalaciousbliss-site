@@ -29,7 +29,7 @@
 		"@rappstack/ui--browser--blog": "workspace:*",
 		"@rappstack/ui--server": "workspace:*",
 		"@rappstack/ui--server--blog": "workspace:*",
-		"@rebuildjs/tailwindcss": "^0.8.53",
+		"@rebuildjs/tailwindcss": "^0.8.56",
 		"@tailwindcss/forms": "^0.5.7",
 		"@tailwindcss/typography": "^0.5.10",
 		"arctic": "^1.2.1",
@@ -44,9 +44,9 @@
 		"nodemailer": "^6.9.11",
 		"oslo": "^1.1.3",
 		"picocolors": "^1.0.0",
-		"rebuildjs": "^0.63.11",
+		"rebuildjs": "^0.64.0",
 		"relementjs": "^0.74.3",
-		"relysjs": "^1.14.18",
+		"relysjs": "^1.15.0",
 		"tailwindcss": "^3.4.1"
 	},
 	"devDependencies": {
