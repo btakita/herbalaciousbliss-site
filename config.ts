@@ -10,13 +10,13 @@ import {
 	fa_x_twitter_
 } from '@btakita/ui--any--herbaliciousbliss/icon'
 import { auth_google_id__set, auth_google_secret__set } from '@rappstack/domain--server--auth/google'
-import { type logo_image_T } from '@rappstack/domain--server/logo'
 import { type site_T } from '@rappstack/domain--server/site'
-import { type social_T } from '@rappstack/domain--server/social'
 import { sqlite_db__set } from '@rappstack/domain--server/sqlite'
 import Database from 'bun:sqlite'
 import { import_meta_env_ } from 'ctx-core/env'
+import { class_, style_, style_url_ } from 'ctx-core/html'
 import { relement__use } from 'relementjs'
+import { div_ } from 'relementjs/html'
 import { server__relement } from 'relementjs/server'
 import { app_ctx, cwd__set, port__set, src_path__set } from 'relysjs/server'
 import herbaliciousbliss_logo_webp from '../../public/asset/image/herbaliciousbliss-logo.webp'
@@ -26,47 +26,65 @@ export const site:site_T = {
 	author: 'Lyra Star',
 	description: 'Find Your Herbal Bliss',
 	title: 'Herbalicious Bliss',
-	og_image: herbaliciousbliss_logo_webp,
+	logo_image__new: ($p?:{ class?:string })=>
+		div_({
+			class: class_(
+				'rounded-full',
+				'bg-no-repeat',
+				'bg-top',
+				'bg-contain',
+				$p?.class),
+			style: style_({
+				'background-image': style_url_(herbaliciousbliss_logo_webp)
+			})
+		}),
+	icon: {
+		type: 'image/webp',
+		href: herbaliciousbliss_logo_webp
+	},
+	social_image_url: herbaliciousbliss_logo_webp,
+	font__meta_props_a1: [
+		{ rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+		{ rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: 1 },
+		{
+			href: 'https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&display=swap',
+			rel: 'stylesheet'
+		}
+	],
 	light_and_dark_mode: true,
+	social_a1: [
+		{
+			icon_: bootstrap_substack_,
+			link_title: 'Substack',
+			href: 'https://lyrastarmist.substack.com/',
+			active: true,
+		},
+		{
+			icon_: fa_facebook_,
+			link_title: 'Facebook',
+			href: 'https://www.facebook.com/HerbaliciousBliss',
+			active: true,
+		},
+		{
+			icon_: fa_instagram_,
+			link_title: 'Instagram',
+			href: 'https://www.instagram.com/lyra_prism/',
+			active: true,
+		},
+		{
+			icon_: fa_linkedin_,
+			link_title: 'LinkedIn',
+			href: 'https://www.linkedin.com/in/lyra-starmist/',
+			active: true,
+		},
+		{
+			icon_: fa_x_twitter_,
+			link_title: 'X/Twitter',
+			href: 'https://twitter.com/SoulSparkLove',
+			active: true,
+		},
+	]
 }
-export const logo_image:logo_image_T = {
-	enable: false,
-	svg: true,
-	width: 216,
-	height: 46,
-}
-export const social_a1:social_T[] = [
-	{
-		icon_: bootstrap_substack_,
-		link_title: 'Substack',
-		href: 'https://lyrastarmist.substack.com/',
-		active: true,
-	},
-	{
-		icon_: fa_facebook_,
-		link_title: 'Facebook',
-		href: 'https://www.facebook.com/HerbaliciousBliss',
-		active: true,
-	},
-	{
-		icon_: fa_instagram_,
-		link_title: 'Instagram',
-		href: 'https://www.instagram.com/lyra_prism/',
-		active: true,
-	},
-	{
-		icon_: fa_linkedin_,
-		link_title: 'LinkedIn',
-		href: 'https://www.linkedin.com/in/lyra-starmist/',
-		active: true,
-	},
-	{
-		icon_: fa_x_twitter_,
-		link_title: 'X/Twitter',
-		href: 'https://twitter.com/SoulSparkLove',
-		active: true,
-	},
-]
 export function config__init() {
 	const port = parseInt(import_meta_env_().HERBALACIOUSBLISS_PORT) || 4102
 	port__set(app_ctx, port)
