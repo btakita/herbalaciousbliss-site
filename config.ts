@@ -38,7 +38,7 @@ export const site:site_T = {
 				'background-image': style_url_(herbaliciousbliss_logo_webp)
 			})
 		}),
-	icon: {
+	favicon: {
 		type: 'image/webp',
 		href: herbaliciousbliss_logo_webp
 	},
@@ -83,7 +83,8 @@ export const site:site_T = {
 			href: 'https://twitter.com/SoulSparkLove',
 			active: true,
 		},
-	]
+	],
+	gtag_id: '' // TODO: change
 }
 export function config__init() {
 	const port = parseInt(import_meta_env_().HERBALACIOUSBLISS_PORT) || 4102
