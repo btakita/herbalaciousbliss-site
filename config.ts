@@ -10,9 +10,10 @@ import {
 	fa_x_twitter_
 } from '@btakita/ui--any--herbaliciousbliss/icon'
 import { auth_google_id__set, auth_google_secret__set } from '@rappstack/domain--server--auth/google'
-import { type site_T } from '@rappstack/domain--server/site'
+import { type author_T, type site_T } from '@rappstack/domain--server/site'
 import { sqlite_db__set } from '@rappstack/domain--server/sqlite'
 import Database from 'bun:sqlite'
+import { url__join } from 'ctx-core/all'
 import { import_meta_env_ } from 'ctx-core/env'
 import { class_, style_, style_url_ } from 'ctx-core/html'
 import { relement__use } from 'relementjs'
@@ -21,9 +22,15 @@ import { server__relement } from 'relementjs/server'
 import { app_ctx, cwd__set, port__set, src_path__set } from 'relysjs/server'
 import herbaliciousbliss_logo_webp from '../../public/asset/image/herbaliciousbliss-logo.webp'
 // You can import this data from anywhere in your site by using the `import` keyword.
+export const website = 'https://herbaliciousbliss.com'
+export const lyra_star = <author_T>{
+	'@type': 'Person',
+	'@id': url__join(website, '#Person'),
+	name: 'Lyra Star',
+}
 export const site:site_T = {
-	website: 'https://herbaliciousbliss.com', // replace this with your deployed domain
-	author: 'Lyra Star',
+	website, // replace this with your deployed domain
+	author_a1: [lyra_star],
 	description: 'Find Your Herbal Bliss',
 	title: 'Herbalicious Bliss',
 	logo_image__new: ($p?:{ class?:string })=>
