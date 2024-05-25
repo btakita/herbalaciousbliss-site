@@ -58,7 +58,10 @@ export const site:site_T = {
 			rel: 'stylesheet'
 		}
 	],
-	light_and_dark_mode: true,
+	color_scheme_vars: {
+		light: {},
+		dark: {},
+	},
 	social_a1: [
 		{
 			icon_: bootstrap_substack_,
